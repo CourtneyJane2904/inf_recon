@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/9200-pentesting-elasticsearch
 host=$1
 port=9200
-mkdir -R "test_results/wap-wsp/${host}"
+mkdir -p "test_results/wap-wsp/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2
