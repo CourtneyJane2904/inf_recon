@@ -1,0 +1,6 @@
+calvin
+PASSW0RD
+admin
+ADMIN
+changeme
+admin
