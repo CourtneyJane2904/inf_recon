@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-imap
 host=$1
 port=143
-mkdir -R "test_results/imap/${host}"
+mkdir -p "test_results/imap/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

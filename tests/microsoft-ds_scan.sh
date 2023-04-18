@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-smb
 host=$1
 port=445
-mkdir -R "test_results/microsoft-ds/${host}"
+mkdir -p "test_results/microsoft-ds/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-dns
 host=$1
 port=53
-mkdir -R "test_results/domain/${host}"
+mkdir -p "test_results/domain/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

@@ -3,7 +3,7 @@
 # https://www.exploit-db.com/exploits/32925
 host=$1
 port=5666
-mkdir -R "test_results/nrpe/${host}"
+mkdir -p "test_results/nrpe/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

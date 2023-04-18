@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/623-udp-ipmi
 host=$1
 port=623
-mkdir -R "test_results/asf-rmcp/${host}"
+mkdir -p "test_results/asf-rmcp/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

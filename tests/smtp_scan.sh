@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-smtp
 host=$1
 port=25
-mkdir -R "test_results/smtp/${host}"
+mkdir -p "test_results/smtp/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

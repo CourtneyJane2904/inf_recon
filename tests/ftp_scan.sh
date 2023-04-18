@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-ftp
 host=$1
 port=21
-mkdir -R "test_results/ftp/${host}"
+mkdir -p "test_results/ftp/${host}"
 ftp_creds="wordlists/ftp_default_creds.txt"
 
 if [[ ! -z "${2}" ]]; then

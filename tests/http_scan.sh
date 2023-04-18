@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-web
 host=$1
 port=80
-mkdir -R "test_results/http/${host}"
+mkdir -p "test_results/http/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

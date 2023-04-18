@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-pop
 host=$1
 port=110
-mkdir -R "test_results/pop/${host}"
+mkdir -p "test_results/pop/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

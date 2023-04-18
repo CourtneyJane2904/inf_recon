@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-telnet
 host=$1
 port=23
-mkdir -R "test_results/telnet/${host}"
+mkdir -p "test_results/telnet/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

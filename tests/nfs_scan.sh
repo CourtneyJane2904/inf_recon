@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/nfs-service-pentesting
 host=$1
 port=2049
-mkdir -R "test_results/nfs/${host}"
+mkdir -p "test_results/nfs/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

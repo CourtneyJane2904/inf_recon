@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-web
 host=$1
 port=443
-mkdir -R "test_results/https/${host}"
+mkdir -p "test_results/https/${host}"
 testssl=$(locate testssl.sh | head -n 1)
 
 if [[ ! -z "${2}" ]]; then

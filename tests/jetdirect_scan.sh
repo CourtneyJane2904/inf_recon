@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/9100-pjl
 host=$1
 port=9100
-mkdir -R "test_results/jetdirect/${host}"
+mkdir -p "test_results/jetdirect/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

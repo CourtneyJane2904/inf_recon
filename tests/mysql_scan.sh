@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-mysql
 host=$1
 port=3306
-mkdir -R "test_results/mysql/${host}"
+mkdir -p "test_results/mysql/${host}"
 mysql_creds="wordlists/mysql_default_creds.txt"
 if [[ ! -z "${2}" ]]; then
 	port=$2

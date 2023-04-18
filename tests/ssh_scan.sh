@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-ssh
 host=$1
 port=22
-mkdir -R "test_results/ssh/${host}"
+mkdir -p "test_results/ssh/${host}"
 ssh_creds="wordlists/ssh_default_creds.txt"
 
 if [[ ! -z "${2}" ]]; then

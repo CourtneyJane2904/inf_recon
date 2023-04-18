@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/ipsec-ike-vpn-pentesting
 host=$1
 port=500
-mkdir -R "test_results/isakmp/${host}"
+mkdir -p "test_results/isakmp/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

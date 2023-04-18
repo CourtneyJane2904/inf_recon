@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-rdp
 host=$1
 port=3389
-mkdir -R "test_results/ms-wbt-server/${host}"
+mkdir -p "test_results/ms-wbt-server/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

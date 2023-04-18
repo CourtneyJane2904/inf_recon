@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-ldap
 host=$1
 port=389
-mkdir -R "test_results/ldap/${host}"
+mkdir -p "test_results/ldap/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-ntp
 host=$1
 port=123
-mkdir -R "test_results/ntp/${host}"
+mkdir -p "test_results/ntp/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

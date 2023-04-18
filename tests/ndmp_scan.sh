@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/10000-network-data-management-protocol-ndmp
 host=$1
 port=10000
-mkdir -R "test_results/ndmp/${host}"
+mkdir -p "test_results/ndmp/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

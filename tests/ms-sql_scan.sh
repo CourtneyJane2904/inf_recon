@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server
 host=$1
 port=1433
-mkdir -R "test_results/mssql/${host}"
+mkdir -p "test_results/mssql/${host}"
 # https://github.com/danielmiessler/SecLists/blob/master/Passwords/Default-Credentials/ftp-betterdefaultpasslist.txt
 mysql_creds="$( locate mysql-betterdefaultpasslist.txt | head -n 1 )"
 if [[ ! -z "${2}" ]]; then

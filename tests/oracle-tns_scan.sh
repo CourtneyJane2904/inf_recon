@@ -4,7 +4,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/1521-1522-1529-pentesting-oracle-listener
 host=$1
 port=1521
-mkdir -R "test_results/oracle-tns/${host}"
+mkdir -p "test_results/oracle-tns/${host}"
 oracle_creds="wordlists/oracle_default_creds.txt"
 if [[ ! -z "${2}" ]]; then
 	port=$2

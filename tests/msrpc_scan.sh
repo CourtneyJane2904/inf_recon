@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/135-pentesting-msrpc
 host=$1
 port=135
-mkdir -R "test_results/msrpc/${host}"
+mkdir -p "test_results/msrpc/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

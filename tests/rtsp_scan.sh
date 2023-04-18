@@ -4,7 +4,7 @@
 
 host=$1
 port=554
-mkdir -R "test_results/rtsp/${host}"
+mkdir -p "test_results/rtsp/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

@@ -3,7 +3,7 @@
 # https://book.hacktricks.xyz/network-services-pentesting/69-udp-tftp
 host=$1
 port=69
-mkdir -R "test_results/tftp/${host}"
+mkdir -p "test_results/tftp/${host}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2
