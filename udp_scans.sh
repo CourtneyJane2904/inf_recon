@@ -8,7 +8,7 @@ total_files=$( find . -type f -name "${filename}.a*" | wc -l )
 
 for ((c=0; c<${total_files}; c++ )); do 
     echo "Launching UDP scan $((c+1))/${total_files}"
-    sudo nmap -sU -Pn --top-ports=1000 --max-rtt-timeout=150ms --max-retries=3 -iL ${filename}.a${chars[c]} -oA scan_results/udp/udp-popular-ports-a${chars[c]} & done; 
+    sudo nmap -sU --top-ports=1000 --max-rtt-timeout=150ms --max-retries=3 -iL ${filename}.a${chars[c]} -oA scan_results/udp/udp-popular-ports-a${chars[c]} & done; 
 
 echo "UDP scans launched, will notify on completion."
 completed_udp=0
