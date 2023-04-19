@@ -14,7 +14,7 @@ echo "Launching SMB scans on ${host}:${port}"
 # enumeration with nmap
 # run default nmap scripts for ftp and retrieve version
 nmap -p${port} $host -sCV -oA "test_results/microsoft-ds/${host}/general_p${port}" &
-nmap --script "safe or smb-enum-*" -p "${port}" "${host}" -oA "test_results/microsoft-ds/${host}/nmap_enum_p${port}" &
+nmap --script "safe or smb-enum-* or smb-vuln*" -p "${port}" "${host}" -oA "test_results/microsoft-ds/${host}/nmap_enum_p${port}" &
 timeout 300s enum4linux -a "${ip}" > "test_results/microsoft-ds/${host}/enum4linux_p${port}" &
 echo "SMB scans on ${host}:${port} launched."
 exit 0
