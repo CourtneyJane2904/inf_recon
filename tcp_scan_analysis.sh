@@ -2,8 +2,8 @@
 
 filename=$1
 # move results in nmap format to nmap-files directory
-mkdir analysis && mkdir analysis/nmap_scan_data && mv *.nmap analysis/nmap_scan_data
-mkdir analysis/other_scan_data && mv tcp-all-ports* analysis/other_scan_data
+mkdir analysis && mkdir analysis/nmap_scan_data && mv scan_results/tcp/*.nmap analysis/nmap_scan_data
+mkdir analysis/other_scan_data && mv scan_results/tcp/tcp-all-ports* analysis/other_scan_data
 # create master files holding results for whole subnet
 echo "Merging scan results into one file..."
 cat analysis/nmap_scan_data/tcp-all-ports* > analysis/nmap_scan_data/tcp-all-ports-${filename}.txt && echo "Merged TCP scan results."
