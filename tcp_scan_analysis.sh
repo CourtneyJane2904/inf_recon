@@ -15,13 +15,14 @@ declare -a tcp_svcs=( \
 	" http$" " https" " isakmp" " microsoft-ds" \
 	" http-proxy" " ftps" " pop2$" " pop3$" " pop3s" " pop2s" \
 	" netbios-ssn" " ms-wbt-server" " wsman" " ms-cluster-net" \
-	" winrm" " msrpc" " nfs" " nrpe" \
+	" winrm" " msrpc" " nfs" " nrpe" " ident" \
 	" smb" " printer" " jetdirect" " svrloc" " llmnr" \
 	" globalcatLDAP$" " globalcatLDAPssl" " ldap$" " ldaps" " ssdp" \
-	" upnp" " http-rpc-epmap" " domain" \
+	" upnp" " http-rpc-epmap" " domain" " sftp" \
 	" kerberos-sec" " login" " shell$" \
-	" exec$" " mysql" " ndmp" " imaps$" \
+	" exec$" " mysql" " ndmp" " imaps$" " iscsi" \
 	" oracle-tns" " ms-sql" " ms-sql-s" " rtsp" " imap$" \
+	" finger" " tacacs"
 	)
 tcp_file="analysis/nmap_scan_data/tcp-all-ports-${filename}.txt"
 current_host=""
@@ -43,6 +44,14 @@ while read line; do
 				port=$(grep "${ip}" analysis/host_lists_by_svc/ssh_hosts.txt | cut -d ':' -f2)
 				echo "Adding SSH notes for ${ip}"
 				text="SSH is present, please see https://book.hacktricks.xyz/network-services-pentesting/pentesting-ssh"
+				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
+				echo "Launching SSH scans"
+				tests/ssh_scan.sh "${ip}" "${port}" &
+			fi
+			if [[ ! -z $(grep "${ip}" analysis/host_lists_by_svc/sftp_hosts.txt) ]]; then
+				port=$(grep "${ip}" analysis/host_lists_by_svc/sftp_hosts.txt | cut -d ':' -f2)
+				echo "Adding SFTP notes for ${ip}"
+				text="SFTP is present, please see https://book.hacktricks.xyz/network-services-pentesting/pentesting-ssh"
 				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
 				echo "Launching SSH scans"
 				tests/ssh_scan.sh "${ip}" "${port}" &
@@ -75,12 +84,26 @@ while read line; do
 				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
 				tests/telnet_scan.sh "${ip}" "${port}" &
 			fi
+			if [[ ! -z $(grep "${ip}" analysis/host_lists_by_svc/iscsi_hosts.txt) ]]; then
+				port=$(grep "${ip}" analysis/host_lists_by_svc/iscsi_hosts.txt | cut -d ':' -f2)
+				echo "Adding ISCSI notes for ${ip}"
+				text="ISCSI is present, please see https://book.hacktricks.xyz/network-services-pentesting/3260-pentesting-iscsi"
+				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
+				tests/iscsi_scan.sh "${ip}" "${port}" &
+			fi
 			if [[ ! -z $(grep "${ip}" analysis/host_lists_by_svc/http_hosts.txt) ]]; then
 				port=$(grep "${ip}" analysis/host_lists_by_svc/http_hosts.txt | cut -d ':' -f2)
 				echo "Adding HTTP notes for ${ip}"
 				text="HTTP is present. This is an unencrypted service and shouldn't be used if the site stores sensitive data."
 				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
 				tests/http_scan.sh "${ip}" "${port}" &
+			fi
+			if [[ ! -z $(grep "${ip}" analysis/host_lists_by_svc/ident_hosts.txt) ]]; then
+				port=$(grep "${ip}" analysis/host_lists_by_svc/ident_hosts.txt | cut -d ':' -f2)
+				echo "Adding IDENT notes for ${ip}"
+				text="IDENT is present. This is an unencrypted service and shouldn't be used if the site stores sensitive data."
+				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
+				tests/ident_scan.sh "${ip}" "${port}" &
 			fi
 			if [[ ! -z $(grep "${ip}" analysis/host_lists_by_svc/https_hosts.txt) ]]; then
 				port=$(grep "${ip}" analysis/host_lists_by_svc/https_hosts.txt | cut -d ':' -f2)
@@ -120,7 +143,7 @@ while read line; do
 			if [[ ! -z $(grep "${ip}" analysis/host_lists_by_svc/pop2_hosts.txt) ]]; then
 				port=$(grep "${ip}" analysis/host_lists_by_svc/pop2_hosts.txt | cut -d ':' -f2)
 				echo "Adding POP notes for ${ip}"
-				text="POP is present, indicating that the host is a mail server. This is an unencrypted service and shouldn't be used. Please see please see https://book.hacktricks.xyz/network-services-pentesting/pentesting-pop"
+				text="POP2 is present, indicating that the host is a mail server. This is an unencrypted service and shouldn't be used. Please see please see https://book.hacktricks.xyz/network-services-pentesting/pentesting-pop"
 				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
 				tests/pop_scan.sh "${ip}" "${port}" &
 			fi
@@ -321,6 +344,19 @@ while read line; do
 				text="RTSP is present, indicating that the host is a media server. Please see https://book.hacktricks.xyz/network-services-pentesting/554-8554-pentesting-rtsp"
 				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
 				tests/rtsp_scan.sh "${ip}" "${port}" &
+			fi
+			if [[ ! -z $(grep "${ip}" analysis/host_lists_by_svc/tacacs_hosts.txt) ]]; then
+				port=$(grep "${ip}" analysis/host_lists_by_svc/tacacs_hosts.txt | cut -d ':' -f2)
+				echo "Adding TACACS notes for ${ip}"
+				text="TACACS is present, please see https://book.hacktricks.xyz/network-services-pentesting/49-pentesting-tacacs+"
+				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
+			fi
+			if [[ ! -z $(grep "${ip}" analysis/host_lists_by_svc/finger_hosts.txt) ]]; then
+				port=$(grep "${ip}" analysis/host_lists_by_svc/finger_hosts.txt | cut -d ':' -f2)
+				echo "Adding finger notes for ${ip}"
+				text="Finger is present, please see https://book.hacktricks.xyz/network-services-pentesting/pentesting-finger"
+				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
+				tests/finger_scan.sh "${ip}" "${port}" &
 			fi
 		fi
 		# update current host as last step
