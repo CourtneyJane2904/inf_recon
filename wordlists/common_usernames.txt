@@ -15,3 +15,11 @@ ansible
 ec2-user
 vagrant
 azureuser
+bin
+daemon
+lp
+sync
+shutdown
+halt
+mail
+news
