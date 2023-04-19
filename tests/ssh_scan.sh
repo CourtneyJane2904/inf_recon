@@ -4,7 +4,7 @@
 host=$1
 port=22
 mkdir -p "test_results/ssh/${host}"
-ssh_creds="wordlists/ssh_default_creds.txt"
+ssh_creds="../wordlists/ssh_default_creds.txt"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

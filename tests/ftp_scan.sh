@@ -4,7 +4,7 @@
 host=$1
 port=21
 mkdir -p "test_results/ftp/${host}"
-ftp_creds="wordlists/ftp_default_creds.txt"
+ftp_creds="../wordlists/ftp_default_creds.txt"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2

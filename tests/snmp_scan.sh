@@ -6,7 +6,7 @@ host=$1
 port=161
 mkdir -p "test_results/snmp/${host}"
 # https://github.com/danielmiessler/SecLists/blob/master/Passwords/Default-Credentials/ftp-betterdefaultpasslist.txt
-snmp_comm_strs="wordlists/common_snmp_comm_strings.txt"
+snmp_comm_strs="../wordlists/common_snmp_comm_strings.txt"
 if [[ ! -z "${2}" ]]; then
 	port=$2
 fi

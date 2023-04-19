@@ -5,7 +5,7 @@
 host=$1
 port=1521
 mkdir -p "test_results/oracle-tns/${host}"
-oracle_creds="wordlists/oracle_default_creds.txt"
+oracle_creds="../wordlists/oracle_default_creds.txt"
 if [[ ! -z "${2}" ]]; then
 	port=$2
 fi
