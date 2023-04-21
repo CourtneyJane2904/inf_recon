@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ ! "$(whoami)" -eq "root" ]]; then
+	echo "Must be root to run this script."
+	exit 1
+fi
 filename="$1"
 list_or_subnet="$2"
 hosts="${3}"

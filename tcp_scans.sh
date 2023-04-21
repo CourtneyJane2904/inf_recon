@@ -8,7 +8,7 @@ total_files=$( find . -type f -name "${filename}.a*" | wc -l )
 
 for ((c=0; c<${total_files}; c++ )); do 
 	echo "Launching TCP scan $((c+1))/${total_files}"
-	nmap -sS --max-rtt-timeout=150ms --max-retries=3 -T4 -p- -iL "${filename}".a${chars[c]} -oA scan_results/tcp/tcp-all-ports-a${chars[c]} & done; 
+	nmap -sS --max-rtt-timeout=150ms --max-retries=3 -T4 -p- -iL "${filename}".a${chars[c]} -Pn -oA scan_results/tcp/tcp-all-ports-a${chars[c]} & done; 
 
 echo "TCP scans launched, will notify on completion."
 completed_tcp=0

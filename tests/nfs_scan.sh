@@ -11,6 +11,7 @@ fi
 
 echo "Launching NFS scans on ${host}:${port}"
 nmap -p${port} --script=nfs-ls,nfs-showmount,nfs-statfs "${host}" -oA "test_results/nfs/${host}/general_p${port}" &
+showmount -e "${host}" > "test_results/nfs/${host}/showmount_p${port}"
 echo "NFS scans on ${host}:${port} launched."
 exit 0
 
