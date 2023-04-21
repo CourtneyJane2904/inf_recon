@@ -22,7 +22,7 @@ declare -a tcp_svcs=( \
 	" kerberos-sec" " login" " shell$" \
 	" exec$" " mysql" " ndmp" " imaps$" " iscsi" \
 	" oracle-tns" " ms-sql" " ms-sql-s" " rtsp" " imap$" \
-	" finger" " tacacs"
+	" finger" " tacacs" " vnc"
 	)
 tcp_file="analysis/nmap_scan_data/tcp-all-ports-${filename}.txt"
 current_host=""
@@ -52,6 +52,14 @@ while read line; do
 				port=$(grep "${ip}" analysis/host_lists_by_svc/sftp_hosts.txt | cut -d ':' -f2)
 				echo "Adding SFTP notes for ${ip}"
 				text="SFTP is present, please see https://book.hacktricks.xyz/network-services-pentesting/pentesting-ssh"
+				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
+				echo "Launching SSH scans"
+				tests/ssh_scan.sh "${ip}" "${port}" &
+			fi
+			if [[ ! -z $(grep "${ip}" analysis/host_lists_by_svc/vnc_hosts.txt) ]]; then
+				port=$(grep "${ip}" analysis/host_lists_by_svc/vnc_hosts.txt | cut -d ':' -f2)
+				echo "Adding VNC notes for ${ip}"
+				text="VNC is present, please see https://book.hacktricks.xyz/network-services-pentesting/pentesting-vnc"
 				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
 				echo "Launching SSH scans"
 				tests/ssh_scan.sh "${ip}" "${port}" &
