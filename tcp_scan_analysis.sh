@@ -2,8 +2,11 @@
 
 filename=$1
 # move results in nmap format to nmap-files directory
-mkdir analysis && mkdir analysis/nmap_scan_data && mv scan_results/tcp/*.nmap analysis/nmap_scan_data
-mkdir analysis/other_scan_data && mv scan_results/tcp/tcp-all-ports* analysis/other_scan_data
+mkdir analysis
+mkdir analysis/nmap_scan_data
+mv scan_results/tcp/*.nmap analysis/nmap_scan_data
+mkdir analysis/other_scan_data 
+mv scan_results/tcp/tcp-all-ports* analysis/other_scan_data
 # create master files holding results for whole subnet
 echo "Merging scan results into one file..."
 cat analysis/nmap_scan_data/tcp-all-ports* > analysis/nmap_scan_data/tcp-all-ports-${filename}.txt && echo "Merged TCP scan results."
@@ -62,7 +65,7 @@ while read line; do
 				text="VNC is present, please see https://book.hacktricks.xyz/network-services-pentesting/pentesting-vnc"
 				echo "${ip}: ${text}" >> "analysis/${ip}_summary.txt"
 				echo "Launching SSH scans"
-				tests/ssh_scan.sh "${ip}" "${port}" &
+				tests/vnc_scan.sh "${ip}" "${port}" &
 			fi
 			if [[ ! -z $(grep "${ip}" analysis/host_lists_by_svc/ftp_hosts.txt) ]]; then
 				port=$(grep "${ip}" analysis/host_lists_by_svc/ftp_hosts.txt | cut -d ':' -f2)

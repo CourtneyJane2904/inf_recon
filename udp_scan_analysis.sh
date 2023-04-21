@@ -2,8 +2,11 @@
 
 filename=$1
 # move results in nmap format to nmap-files directory
-mkdir analysis && mkdir analysis/nmap_scan_data && mv scan_results/udp/*.nmap analysis/nmap_scan_data
-mkdir analysis/other_scan_data && mv scan_results/udp/udp-popular-ports* analysis/other_scan_data
+mkdir analysis
+mkdir analysis/nmap_scan_data
+mv scan_results/udp/*.nmap analysis/nmap_scan_data
+mkdir analysis/other_scan_data
+mv scan_results/udp/udp-popular-ports* analysis/other_scan_data
 # create master files holding results for whole subnet
 echo "Merging scan results into one file..."
 cat analysis/nmap_scan_data/udp-popular-ports* > analysis/nmap_scan_data/udp-pop-ports-${filename}.txt && echo "Merged UDP scan results."
