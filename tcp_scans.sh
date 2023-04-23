@@ -23,7 +23,6 @@ while true; do
         ./tcp_scan_analysis.sh "${filename}" &
         stty echo
         exit 0
-    elif [[  ]]
     fi
     echo "${completed_tcp}/${total_files} TCP scans complete."
     completed_tcp=0
