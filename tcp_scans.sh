@@ -20,9 +20,10 @@ while true; do
     done
     if [[ $completed_tcp -eq $total_files ]]; then
         echo "TCP scans complete, now proceeding to analysis."
-        ./tcp_scan_analysis.sh "${filename}"
+        ./tcp_scan_analysis.sh "${filename}" &
         stty echo
         exit 0
+    elif [[  ]]
     fi
     echo "${completed_tcp}/${total_files} TCP scans complete."
     completed_tcp=0

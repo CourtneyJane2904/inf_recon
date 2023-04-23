@@ -20,7 +20,7 @@ while true; do
     done
     if [[ $completed_udp -eq $total_files ]]; then
         echo "UDP scans complete, now proceeding with analysis."
-        ./udp_scan_analysis.sh "${filename}"
+        ./udp_scan_analysis.sh "${filename}" &
         stty echo
         exit 0
     fi
