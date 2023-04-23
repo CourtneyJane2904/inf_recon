@@ -25,20 +25,21 @@ declare -a tcp_svcs=( \
 	" kerberos-sec" " login" " shell$" \
 	" exec$" " mysql" " ndmp" " imaps$" " iscsi" \
 	" oracle-tns" " ms-sql" " ms-sql-s" " rtsp" " imap$" \
-	" finger" " tacacs" " vnc"
+	" finger" " tacacs" " vnc" \
 	)
 tcp_file="analysis/nmap_scan_data/tcp-all-ports-${filename}.txt"
+total_hosts=$(grep "Nmap scan report for" "${tcp_file}" | wc -l)
 current_host=""
 
 # analyze tcp file first
 while read line; do
 	# store host details
 	new_host=$(echo "${line}" | grep "Nmap scan report for")
-	echo "${line}" | grep "Nmap scan report for"
-	echo "new host: ${new_host}"
 	# if line is the beginning of results for a different host, update current host
 	# add results for completed host to analysis file (e.g. if ip in ssh-hosts, add note on ssh use)
-	if [[ ! -z "$new_host" ]]; then 
+	finished=$(echo "${line}" | grep "Nmap done")
+	
+	if [[ ! -z "$new_host" ]] ||  [[ ! -z "${finished}" && $total_hosts -eq 1 ]]; then 
 		# add analysis for prev host if there was a prev host
 		if [[ ! -z "$current_host" ]]; then
 			ip=$(echo "${current_host}" | cut -d '(' -f2 | tr -d ')')
@@ -389,7 +390,7 @@ while read line; do
 			# add host ip to hostlist for service (e.g. ssh-hosts.txt)
 			ip=$(echo "${current_host}" | cut -d '(' -f2 | tr -d ')')
 			echo "Adding ${ip} to ${formatted_svc}_hosts.txt"
-			echo "${ip}:${port}" >> analysis/host_lists_by_svc/"${formatted_svc}"_hosts.txt
+			echo "${ip}:${port}" >> analysis/host_lists_by_svc/${formatted_svc}_hosts.txt
 		fi
 	done
 done < "${tcp_file}"

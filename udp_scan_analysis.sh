@@ -23,16 +23,17 @@ declare -a udp_svcs=( \
 	)
 
 udp_file="analysis/nmap_scan_data/udp-pop-ports-${filename}.txt"
+total_hosts=$(grep "Nmap scan report for" "${udp_file}" | wc -l)
 current_host=""
 
 # analyze tcp file first
 while read line; do
 	# store host details
 	new_host=$(echo "${line}" | grep "Nmap scan report for")
-
+	finished=$(echo "${line}" | grep "Nmap done")
 	# if line is the beginning of results for a different host, update current host
 	# add results for completed host to analysis file (e.g. if ip in ssh-hosts, add note on ssh use)
-	if [[ ! -z "$new_host" ]]; then 
+	if [[ ! -z "$new_host" ]] ||  [[ ! -z "${finished}" && $total_hosts -eq 1 ]]; then 
 		# add analysis for prev host if there was a prev host
 		if [[ ! -z "$current_host" ]]; then
 			ip=$(echo "${current_host}" | cut -d '(' -f2 | tr -d ')')
