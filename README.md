@@ -27,5 +27,11 @@ Automates the initial recon phase of an infrastructure assessment- launches TCP/
 <h2>Limitations</h2>
 <ul>
     <li>A maximum of 6400 hosts at a time is currently supported; this can be easily adjusted by making changes to inf_recon.sh, tcp_scans.sh and udp_scans.sh</li>
-    <li><pre>./inf_recon.sh client -s 192.168.0.0/24</pre> generate list of IPs in 192.168.0.0/24, split into 64-line files named client.000-client.999 and perform scans</li>
+    <li>There is no idiot proofing as of now- make sure you provide valid arguments!</li>
+    <li>The script must be run as root- not sudo, you must run the script logged in to the terminal as root. Bit annoying, probably something I'll work on in future</li>
+</ul>
+
+<h2>Disclaimer</h2>
+<ul>
+    <li>This is very much still a work in progress- there are already some things I have in mind to change in future such as separating *_scan_analysis.sh into separate files and organising the resulting directory structure better. I also want to add more to the service scan scripts as some nmap scripts don't work. The issue is having access to a testing environment for it that has a majority of the services checked for available! It does work, just ignore the mess. :)</li>
 </ul>
