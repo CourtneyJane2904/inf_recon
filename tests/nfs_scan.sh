@@ -3,15 +3,16 @@
 # https://book.hacktricks.xyz/network-services-pentesting/nfs-service-pentesting
 host=$1
 port=2049
-mkdir -p "test_results/nfs/${host}"
+dest_dir="svc_scan_results/${host}/nfs"
+mkdir -p "${dest_dir}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2
 fi
 
 echo "Launching NFS scans on ${host}:${port}"
-nmap -p${port} --script=nfs-ls,nfs-showmount,nfs-statfs "${host}" -oA "test_results/nfs/${host}/general_p${port}" &
-showmount -e "${host}" > "test_results/nfs/${host}/showmount_p${port}"
+nmap -p${port} --script=nfs-ls,nfs-showmount,nfs-statfs "${host}" -oA "${dest_dir}/general_p${port}" &
+showmount -e "${host}" > "${dest_dir}/showmount_p${port}"
 echo "NFS scans on ${host}:${port} launched."
 exit 0
 

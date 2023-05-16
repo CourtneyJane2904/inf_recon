@@ -3,7 +3,8 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-rdp
 host=$1
 port=3389
-mkdir -p "test_results/ms-wbt-server/${host}"
+dest_dir="svc_scan_results/${host}/ms-wbt-server"
+mkdir -p "${dest_dir}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2
@@ -13,10 +14,10 @@ echo "Launching RDP scans on ${host}:${port}"
 
 # enumeration with nmap
 # run default nmap scripts for ftp and retrieve version
-nmap -p${port} $host -sCV -oA "test_results/ms-wbt-server/${host}/general_p${port}" &
-nmap --script "rdp-vuln-ms12-020" -p ${port} -T4 ${host} -oA "test_results/ms-wbt-server/${host}/vuln_p${port}" &
-nmap --script "rdp-ntlm-info" -p ${port} -T4 ${host} -oA "test_results/ms-wbt-server/${host}/ntlm_p${port}" &
-nmap --script "rdp-enum-encryption" -p ${port} -T4 ${host} -oA "test_results/ms-wbt-server/${host}/encryption_p${port}" &
+nmap -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
+nmap --script "rdp-vuln-ms12-020" -p ${port} -T4 ${host} -oA "${dest_dir}/vuln_p${port}" &
+nmap --script "rdp-ntlm-info" -p ${port} -T4 ${host} -oA "${dest_dir}/ntlm_p${port}" &
+nmap --script "rdp-enum-encryption" -p ${port} -T4 ${host} -oA "${dest_dir}/encryption_p${port}" &
 
 echo "RDP scans on ${host}:${port} launched."
 exit 0

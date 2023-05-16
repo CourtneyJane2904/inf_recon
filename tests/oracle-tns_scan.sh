@@ -4,7 +4,8 @@
 # https://book.hacktricks.xyz/network-services-pentesting/1521-1522-1529-pentesting-oracle-listener
 host=$1
 port=1521
-mkdir -p "test_results/oracle-tns/${host}"
+dest_dir="svc_scan_results/${host}/oracle-tns"
+mkdir -p "${dest_dir}"
 oracle_creds="wordlists/oracle_default_creds.txt"
 if [[ ! -z "${2}" ]]; then
 	port=$2
@@ -12,9 +13,9 @@ fi
 
 echo "Launching Oracle scans on ${host}:${port}"
 # must download
-nmap --script "oracle-tns-version" -p ${port} -T4 -sV ${host} -oA "test_results/oracle-tns/${host}/general_p${port}" &
-nmap --script +oracle-sid-brute -p ${port} ${host} -oA "test_results/oracle-tns/${host}/sid_brute_p${port}" &
-oscanner -s "${host}" -P ${port} > "test_results/oracle-tns/${host}/oscanner_p${port}" &
+nmap --script "oracle-tns-version" -p ${port} -T4 -sV ${host} -oA "${dest_dir}/general_p${port}" &
+nmap --script +oracle-sid-brute -p ${port} ${host} -oA "${dest_dir}/sid_brute_p${port}" &
+oscanner -s "${host}" -P ${port} > "${dest_dir}/oscanner_p${port}" &
 echo "Oracle scans on ${host}:${port} launched."
 exit 0
 

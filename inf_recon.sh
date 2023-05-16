@@ -1,7 +1,9 @@
 #!/bin/bash
 
-if [[ ! "$(whoami)" -eq "root" ]]; then
+# if user is not root, don't run
+if [[ "$(whoami)" -ne "root" ]]; then
 	echo "Must be root to run this script."
+	stty echo
 	exit 1
 fi
 filename="$1"
@@ -13,8 +15,9 @@ if [[ $total_files -eq 0 ]]; then
 	# get list of ips in subnet
 	if [[ $(echo $list_or_subnet | grep -- -l ) ]]; then
 		echo "Splitting IPs from ${hosts} into 64-line chunks..."
-		# split ip list into chunks of 64 lines
-		split -l 64 "${hosts}" ${filename}.
+		# split ip list into chunks of 64 lines and make the file extension 3-digit suffixes
+		# adjust -a flag if more than 6400 hosts need to be scanned, e.g. -a 4 will support 6400+ hosts
+		split -dl 64 -a 3 "${hosts}" ${filename}.
 	elif [[ $(echo $list_or_subnet | grep -- -s ) ]]; then
 		echo "Getting IP range of ${hosts} from nmap..."
 		nmap -sL -n $hosts | cut -d " " -f5 | grep -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' > ${filename}
@@ -25,7 +28,8 @@ if [[ $total_files -eq 0 ]]; then
 		fi
 		# split ip list into chunks of 64 lines
 		echo "Splitting IPs from ${filename} into 64-line chunks..."
-		split -l 64 ${filename} ${filename}.
+		# adjust -a flag if more than 6400 hosts need to be scanned, e.g. -a 4 will support 6400+ hosts
+		split -dl 64 -a 3 ${filename} ${filename}.
 	else
 		echo "Usage"
 		echo "Launch TCP scans from list of IPs: inf_recon.sh <project name> -l <ip list file path>"

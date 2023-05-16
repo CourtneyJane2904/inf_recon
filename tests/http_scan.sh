@@ -3,7 +3,8 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-web
 host=$1
 port=80
-mkdir -p "test_results/http/${host}"
+dest_dir="svc_scan_results/${host}/http"
+mkdir -p "${dest_dir}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2
@@ -13,10 +14,10 @@ echo "Launching HTTP scans on ${host}:${port}"
 
 # enumeration with nmap
 # run default nmap scripts for ftp and retrieve version
-nc -v "${host}" "${port}" > "test_results/http/${host}/banner_p${port}" 
-nmap -p${port} $host -sCV -oA "test_results/http/${host}/general_p${port}" &
-whatweb -a 3 "http://${host}:${port}" > "test_results/http/${host}/whatweb_enum_p${port}" &
-nikto -h "${host}:${port}" -nointeractive -maxtime 360 >> "test_results/http/${host}/nikto_enum_p${port}" &
-timeout 360 gobuster dir -r -u "http://${host}:${port}/" -w wordlists/small_dir_list.txt -t 40 -x .js,.js.map,.txt > "test_results/http/${host}/pages_found_p${port}" &
+nc -v "${host}" "${port}" > "${dest_dir}/banner_p${port}" 
+nmap -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
+whatweb -a 3 "http://${host}:${port}" > "${dest_dir}/whatweb_enum_p${port}" &
+nikto -h "${host}:${port}" -nointeractive -maxtime 360 >> "${dest_dir}/nikto_enum_p${port}" &
+timeout 360 gobuster dir -r -u "http://${host}:${port}/" -w wordlists/small_dir_list.txt -t 40 -x .js,.js.map,.txt > "${dest_dir}/pages_found_p${port}" &
 echo "HTTP scans on ${host}:${port} launched."
 exit 0

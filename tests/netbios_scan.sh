@@ -4,15 +4,15 @@
 filename=$1
 host=$2
 port=139
+dest_dir="svc_scan_results/netbios"
 
 echo "Found netbios."
-if [ ! -d "test_results/netbios/" ]; then
+if [ ! -d "${dest_dir}/" ]; then
 	echo "Launching nbtstat and nbtscan on all hosts."
-	mkdir -p "test_results/netbios/nbtstat"
-	mkdir -p "test_results/netbios/nbtscan"
+	mkdir -p "${dest_dir}/${host}"
 	while read host; do
-		nbtstat -A "${host}" > "test_results/netbios/nbtstat/${host}" &
-		nbtscan "${host}" > "test_results/netbios/nbtscan/${host}" &
+		nbtstat -A "${host}" > "${dest_dir}/${host}/nbtstat" &
+		nbtscan "${host}" > "${dest_dir}/${host}/nbtscan" &
 	done < "${filename}"
 else
 	echo "Already launched nbtstat and nbtscan, skipping"

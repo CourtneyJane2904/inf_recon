@@ -3,7 +3,8 @@
 # https://book.hacktricks.xyz/network-services-pentesting/ipsec-ike-vpn-pentesting
 host=$1
 port=500
-mkdir -p "test_results/isakmp/${host}"
+dest_dir="svc_scan_results/${host}/isakmp"
+mkdir -p "${dest_dir}"
 
 if [[ ! -z "${2}" ]]; then
 	port=$2
@@ -13,9 +14,9 @@ echo "Launching IKE scans on ${host}:${port}"
 
 # enumeration with nmap
 # run default nmap scripts for ftp and retrieve version
-nmap -p${port} $host -sCV -oA "test_results/isakmp/${host}/general_p${port}" &
-ike-scan -M "${host}" --dport=${port} > "test_results/isakmp/${host}/ikescan_p${port}" &
-ike-scan -M --showbackoff "${host}" --dport=${port} > "test_results/isakmp/${host}/vpn_vendor_p${port}" &
+nmap -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
+ike-scan -M "${host}" --dport=${port} > "${dest_dir}/ikescan_p${port}" &
+ike-scan -M --showbackoff "${host}" --dport=${port} > "${dest_dir}/vpn_vendor_p${port}" &
 
 echo "IKE scans on ${host}:${port} launched."
 exit 0

@@ -4,7 +4,8 @@
 # https://book.hacktricks.xyz/network-services-pentesting/pentesting-snmp/snmp-rce
 host=$1
 port=161
-mkdir -p "test_results/snmp/${host}"
+dest_dir="svc_scan_results/${host}/snmp"
+mkdir -p "${dest_dir}"
 # https://github.com/danielmiessler/SecLists/blob/master/Passwords/Default-Credentials/ftp-betterdefaultpasslist.txt
 snmp_comm_strs="wordlists/snmp_comm_strings.txt"
 if [[ ! -z "${2}" ]]; then
@@ -13,8 +14,8 @@ fi
 
 echo "Launching SNMP scans on ${host}:${port}"
 # must download
-nmap -sU --script snmp-brute "${host}" -p${port} -oA "test_results/snmp/${host}/snmp_brute_p${port}" &
-hydra -P "${snmp_comm_strs}" "${host}" -s "${port}" -o "test_results/snmp/${host}/hydra_brute_p${port}" snmp &
+nmap -sU --script snmp-brute "${host}" -p${port} -oA "${dest_dir}/snmp_brute_p${port}" &
+hydra -P "${snmp_comm_strs}" "${host}" -s "${port}" -o "${dest_dir}/hydra_brute_p${port}" snmp &
 echo "SNMP scans on ${host}:${port} launched."
 exit 0
 
