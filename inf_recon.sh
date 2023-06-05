@@ -17,7 +17,8 @@ if [[ $total_files -eq 0 ]]; then
 		echo "Splitting IPs from ${hosts} into 64-line chunks..."
 		# split ip list into chunks of 64 lines and make the file extension 3-digit suffixes
 		# adjust -a flag if more than 6400 hosts need to be scanned, e.g. -a 4 will support 6400+ hosts
-		split -dl 64 -a 3 "${hosts}" ${filename}.
+		cp "${hosts}" "${filename}"
+		split -dl 64 -a 3 "${filename}" ${filename}.
 	elif [[ $(echo $list_or_subnet | grep -- -s ) ]]; then
 		echo "Getting IP range of ${hosts} from nmap..."
 		nmap -sL -n $hosts | cut -d " " -f5 | grep -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' > ${filename}

@@ -9,10 +9,11 @@ dest_dir="svc_scan_results/netbios"
 echo "Found netbios."
 if [ ! -d "${dest_dir}/" ]; then
 	echo "Launching nbtstat and nbtscan on all hosts."
-	mkdir -p "${dest_dir}/${host}"
 	while read host_frm_file; do
-		nbtstat -A "${host_frm_file}" > "${dest_dir}/${host_frm_file}/nbtstat" &
-		nbtscan "${host_frm_file}" > "${dest_dir}/${host_frm_file}/nbtscan" &
+		mkdir -p "${dest_dir}/${host_frm_file}"
+		dest_dir="${dest_dir}/${host_frm_file}"
+		nbtstat -A "${host_frm_file}" > "${dest_dir}/nbtstat" &
+		nbtscan "${host_frm_file}" > "${dest_dir}/nbtscan" &
 	done < "${filename}"
 else
 	echo "Already launched nbtstat and nbtscan, skipping"
