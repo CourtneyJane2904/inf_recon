@@ -10,8 +10,8 @@ echo "Found netbios."
 if [ ! -d "${dest_dir}/" ]; then
 	echo "Launching nbtstat and nbtscan on all hosts."
 	while read host_frm_file; do
-		mkdir -p "${dest_dir}/${host_frm_file}"
 		dest_dir="${dest_dir}/${host_frm_file}"
+		mkdir -p "${dest_dir}/"
 		nbtstat -A "${host_frm_file}" > "${dest_dir}/nbtstat" &
 		nbtscan "${host_frm_file}" > "${dest_dir}/nbtscan" &
 	done < "${filename}"
