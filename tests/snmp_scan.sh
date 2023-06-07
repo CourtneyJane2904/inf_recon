@@ -14,7 +14,7 @@ fi
 
 echo "Launching SNMP scans on ${host}:${port}"
 # must download
-nmap -sU --script snmp-brute "${host}" -p${port} -oA "${dest_dir}/snmp_brute_p${port}" &
+#nmap -sU --script snmp-brute "${host}" -p${port} -oA "${dest_dir}/snmp_brute_p${port}" &
 hydra -P "${snmp_comm_strs}" "${host}" -s "${port}" -o "${dest_dir}/hydra_brute_p${port}" snmp &
 echo "SNMP scans on ${host}:${port} launched."
 exit 0

@@ -13,7 +13,7 @@ fi
 echo "Launching ISCSI scans on ${host}:${port}"
 # must download
 nmap -sV --script=iscsi-info -p "${port}" "${host}" -oA "${dest_dir}/general_p${port}" &
-nmap -sV --script=iscsi-brute "${host}" -p "${port}" -oA "${dest_dir}/bruteforce_p${port}" &
+#nmap -sV --script=iscsi-brute "${host}" -p "${port}" -oA "${dest_dir}/bruteforce_p${port}" &
 iscsiadm -m discovery -t sendtargets -p "${host}:${port}" > "${dest_dir}/targetname_p${port}" &
 echo "ISCSI scans on ${host}:${port} launched."
 exit 0
