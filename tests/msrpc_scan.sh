@@ -12,6 +12,6 @@ fi
 
 echo "Launching RPC scans on ${host}:${port}"
 # must download
-rpcdump.py "${host}" -p "${port}" > "${dest_dir}/rpcdump_p${port}" &
+tools/rpcdump.py "${host}" -p "${port}" > "${dest_dir}/rpcdump_p${port}" &
 echo "RPC scans on ${host}:${port} launched."
 exit 0
