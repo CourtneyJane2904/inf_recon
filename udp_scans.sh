@@ -5,7 +5,7 @@ mkdir -p scan_results/udp
  # begin top 1000 UDP scans on each chunk, can be adjusted as needed
  # adjust if more than 6400 hosts need to be scanned- e.g. use {0000..9999} if more than 6400 hosts need to be scanned 
 nums=({000..999})
-total_files=$( find . -type f -name "${filename}.[[:digit:]]" | wc -l )
+total_files=$( find . -type f -name "${filename}.[0-9][0-9][0-9]" | wc -l )
 
 for ((c=0; c<${total_files}; c++ )); do 
     echo "Launching UDP scan $((c+1))/${total_files}"

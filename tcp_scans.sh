@@ -5,7 +5,7 @@ mkdir -p scan_results/tcp
 # begin full TCP scans on each chunk, may need adjusting in some situations
 # adjust if more than 6400 hosts need to be scanned- e.g. use {0000..9999} if more than 6400 hosts need to be scanned 
 nums=({000..999})
-total_files=$( find . -type f -name "${filename}.[[:digit:]]" | wc -l )
+total_files=$( find . -type f -name "${filename}.[0-9][0-9][0-9]" | wc -l )
 
 for ((c=0; c<${total_files}; c++ )); do 
 	echo "Launching TCP scan $((c+1))/${total_files}"
