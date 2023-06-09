@@ -9,7 +9,7 @@ declare -a tcp_svcs=( \
 	" http$" " https" " isakmp" " microsoft-ds" \
 	" http-proxy" " ftps" " pop2$" " pop3$" " pop3s" " pop2s" \
 	" netbios-ssn" " ms-wbt-server" " wsman" " ms-cluster-net" \
-	" winrm" " msrpc" " nfs" " nrpe" " icd mdent" \
+	" winrm" " msrpc" " nfs" " nrpe" " ident" \
 	" smb" " printer" " jetdirect" " svrloc" " llmnr" \
 	" globalcatLDAP$" " globalcatLDAPssl" " ldap$" " ldaps" " ssdp" \
 	" upnp" " http-rpc-epmap" " domain" " sftp" \
