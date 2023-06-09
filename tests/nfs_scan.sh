@@ -11,7 +11,7 @@ if [[ ! -z "${2}" ]]; then
 fi
 
 echo "Launching NFS scans on ${host}:${port}"
-nmap -p${port} --script=nfs-ls,nfs-showmount,nfs-statfs "${host}" -oA "${dest_dir}/general_p${port}" &
+nmap -Pn -p${port} --script=nfs-ls,nfs-showmount,nfs-statfs "${host}" -oA "${dest_dir}/general_p${port}" &
 showmount -e "${host}" > "${dest_dir}/showmount_p${port}"
 echo "NFS scans on ${host}:${port} launched."
 exit 0

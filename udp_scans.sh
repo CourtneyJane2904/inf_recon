@@ -22,6 +22,15 @@ while true; do
     done
     if [[ $completed_udp -eq $total_files ]]; then
         echo "UDP scans complete, now proceeding with analysis."
+        # move results in nmap format to nmap-files directory
+        mkdir analysis
+        mkdir analysis/nmap_scan_data
+        mv scan_results/udp/*.nmap analysis/nmap_scan_data
+        mkdir analysis/other_scan_data
+        mv scan_results/udp/udp-popular-ports* analysis/other_scan_data
+        # create master file holding results for whole subnet
+        echo "Merging scan results into one file..."
+        cat analysis/nmap_scan_data/udp-popular-ports* > analysis/nmap_scan_data/udp-pop-ports-${filename}.txt && echo "Merged UDP scan results."
         ./udp_scan_analysis.sh "${filename}" &
         stty echo
         exit 0

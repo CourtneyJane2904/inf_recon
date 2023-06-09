@@ -11,7 +11,7 @@ if [[ ! -z "${2}" ]]; then
 fi
 
 echo "Launching NDMP scans on ${host}:${port}"
-nmap -sCV -p "${port}" "${host}" -oA "${dest_dir}/general_p${port}" &
+nmap -Pn -sCV -p "${port}" "${host}" -oA "${dest_dir}/general_p${port}" &
 echo "NDMP scans on ${host}:${port} launched."
 exit 0
 

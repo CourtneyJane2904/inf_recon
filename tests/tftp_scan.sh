@@ -12,7 +12,7 @@ fi
 
 echo "Launching TFTP scans on ${host}:${port}"
 
-nmap -n -Pn -sU -p"${port}" -sV --script tftp-enum "${host}" -oA "${dest_dir}/tftp_enum_p${port}" &
+nmap -Pn -sU -p"${port}" -sV --script tftp-enum "${host}" -oA "${dest_dir}/tftp_enum_p${port}" &
 
 echo "TFTP scans on ${host}:${port} launched."
 exit 0

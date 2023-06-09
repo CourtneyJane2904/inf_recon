@@ -16,7 +16,7 @@ echo "Launching FTP scans on ${host}:${port}"
 # enumeration with nmap
 # run default nmap scripts for ftp and retrieve version
 nc -vn "${host}" "${port}" > "${dest_dir}/banner_p${port}" 
-nmap -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
+nmap -Pn -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
 
 echo "FTP scans on ${host}:${port} launched."
 exit 0

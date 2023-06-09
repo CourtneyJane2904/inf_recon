@@ -12,7 +12,7 @@ fi
 
 echo "Launching LDAP scans on ${host}:${port}"
 # must download
-nmap -n -sV --script "ldap* and not brute" ${host} -oA "${dest_dir}/general_p${port}" &
+nmap -Pn -sV --script "ldap* and not brute" ${host} -oA "${dest_dir}/general_p${port}" &
 echo "LDAP scans on ${host}:${port} launched."
 exit 0
 

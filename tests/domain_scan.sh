@@ -12,8 +12,8 @@ fi
 
 echo "Launching DNS scans on ${host}:${port}"
 # must download
-nmap -n -sV --script "dns-nsid" ${host} -p"${port}" -oA "${dest_dir}/banner_p${port}" &
-nmap -n --script "(default and *dns*) or fcrdns or dns-srv-enum or dns-random-txid or dns-random-srcport" ${host} -p"${port}" -oA "${dest_dir}/enum_p${port}" &
+nmap -Pn -sV --script "dns-nsid" ${host} -p"${port}" -oA "${dest_dir}/banner_p${port}" &
+nmap -Pn --script "(default and *dns*) or fcrdns or dns-srv-enum or dns-random-txid or dns-random-srcport" ${host} -p"${port}" -oA "${dest_dir}/enum_p${port}" &
 dig axfr @"${host}" > "${dest_dir}/zone_transfer_p${port}" 
 dig TXT @"${host}" > "${dest_dir}/txt_records_p${port}"
 dig MX@"${host}" > "${dest_dir}/mail_records_p${port}"

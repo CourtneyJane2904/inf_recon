@@ -12,6 +12,6 @@ fi
 
 echo "Launching raw printing scans on ${host}:${port}"
 # must download
-nmap -p${port} --script pjl-ready-message "${host}" -oA "${dest_dir}/pjl-ready_p${port}" &
+nmap -Pn -p${port} --script pjl-ready-message "${host}" -oA "${dest_dir}/pjl-ready_p${port}" &
 echo "Raw printing scans on ${host}:${port} launched."
 exit 0

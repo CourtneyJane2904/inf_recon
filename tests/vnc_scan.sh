@@ -12,9 +12,9 @@ fi
 
 echo "Launching VNC scans on ${host}:${port}"
 
-nmap -n -Pn -p"${port}" -sV --script vnc-info,vnc-title "${host}" -oA "${dest_dir}/general_p${port}" &
-nmap -n -Pn -p"${port}" -sV --script realvnc-auth-bypass "${host}" -oA "${dest_dir}/realvnc_auth_bypass_p${port}" &
-nmap -n -Pn -p"${port}" -sV --script vnc-brute "${host}" -oA "${dest_dir}/brute_p${port}" &
+nmap -Pn -p"${port}" -sV --script vnc-info,vnc-title "${host}" -oA "${dest_dir}/general_p${port}" &
+nmap -Pn -p"${port}" -sV --script realvnc-auth-bypass "${host}" -oA "${dest_dir}/realvnc_auth_bypass_p${port}" &
+nmap -Pn -p"${port}" -sV --script vnc-brute "${host}" -oA "${dest_dir}/brute_p${port}" &
 
 echo "VNC scans on ${host}:${port} launched."
 exit 0

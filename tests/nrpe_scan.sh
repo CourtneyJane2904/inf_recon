@@ -12,6 +12,6 @@ fi
 
 echo "Launching NRPE scans on ${host}:${port}"
 # must download
-nmap -p${port} --script nrpe-enum "${host}" -oA "${dest_dir}/general_p${port}" &
+nmap -Pn -p${port} --script nrpe-enum "${host}" -oA "${dest_dir}/general_p${port}" &
 echo "NRPE scans on ${host}:${port} launched."
 exit 0

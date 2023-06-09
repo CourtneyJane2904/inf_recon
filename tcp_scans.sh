@@ -22,7 +22,15 @@ while true; do
         if [[ $( grep "Nmap done" scan_results/tcp/tcp-all-ports-${nums[ch]}.nmap ) ]]; then completed_tcp=$((completed_tcp+1)); fi
     done
     if [[ $completed_tcp -eq $total_files ]]; then
-        echo "TCP scans complete, now proceeding to analysis."
+        echo "TCP scans complete."
+        mkdir analysis
+        mkdir analysis/nmap_scan_data
+        mv scan_results/tcp/*.nmap analysis/nmap_scan_data
+        mkdir analysis/other_scan_data 
+        mv scan_results/tcp/tcp-all-ports* analysis/other_scan_data
+        # create master files holding results for whole subnet
+        echo "Merging scan results into one file..."
+        cat analysis/nmap_scan_data/tcp-all-ports* > analysis/nmap_scan_data/tcp-all-ports-${filename}.txt && echo "Merged TCP scan results."
         ./tcp_scan_analysis.sh "${filename}" &
         stty echo
         exit 0

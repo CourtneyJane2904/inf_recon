@@ -12,6 +12,6 @@ if [[ ! -z "${2}" ]]; then
 fi
 
 echo "Launching RTSP scans on ${host}:${port}"
-nmap -sV --script "rtsp-*" -p ${port} ${host} -oA "${dest_dir}/general_p${port}" &
+nmap -Pn -sV --script "rtsp-*" -p ${port} ${host} -oA "${dest_dir}/general_p${port}" &
 echo "RTSP scans on ${host}:${port} launched."
 exit 0

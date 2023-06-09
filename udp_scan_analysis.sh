@@ -1,15 +1,7 @@
 #!/bin/bash
 
 filename=$1
-# move results in nmap format to nmap-files directory
-mkdir analysis
-mkdir analysis/nmap_scan_data
-mv scan_results/udp/*.nmap analysis/nmap_scan_data
-mkdir analysis/other_scan_data
-mv scan_results/udp/udp-popular-ports* analysis/other_scan_data
-# create master file holding results for whole subnet
-echo "Merging scan results into one file..."
-cat analysis/nmap_scan_data/udp-popular-ports* > analysis/nmap_scan_data/udp-pop-ports-${filename}.txt && echo "Merged UDP scan results."
+
 # create analysis dir for storage of data generated from this script
 mkdir analysis/host_lists_by_svc
 # create files of hosts by services, useful for performing service-specific scans
@@ -130,9 +122,6 @@ while read line; do
 		# update current host as last step
 		current_host=$(echo $new_host | cut -d ' ' -f5-);
 	fi
-
-	# continue if current host empty- means we haven't reached results yet
-	if [[ -z "$current_host" ]]; then continue; fi
 
 	# at this point, we have info on the current host and are ready to analyze services
 	# first we are going to add host info to relevant file for service-specific scan scripts

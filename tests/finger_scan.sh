@@ -12,7 +12,7 @@ fi
 
 echo "Launching finger scans on ${host}:${port}"
 nc -vn "${host}" "${port}" > "${dest_dir}/banner_p${port}" 
-nmap -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
+nmap -Pn -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
 finger @${host} > "${dest_dir}/user_list_p${port}"
 echo "Finger scans on ${host}:${port} launched."
 exit 0
