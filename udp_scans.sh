@@ -31,7 +31,7 @@ while true; do
         # create master file holding results for whole subnet
         echo "Merging scan results into one file..."
         cat analysis/nmap_scan_data/udp-popular-ports* > analysis/nmap_scan_data/udp-pop-ports-${filename}.txt && echo "Merged UDP scan results."
-        ./udp_scan_analysis.sh "${filename}" &
+        ./udp_lists_by_svc.sh "${filename}" &
         stty echo
         exit 0
     fi

@@ -31,7 +31,7 @@ while true; do
         # create master files holding results for whole subnet
         echo "Merging scan results into one file..."
         cat analysis/nmap_scan_data/tcp-all-ports* > analysis/nmap_scan_data/tcp-all-ports-${filename}.txt && echo "Merged TCP scan results."
-        ./tcp_scan_analysis.sh "${filename}" &
+        ./tcp_lists_by_svc.sh "${filename}" &
         stty echo
         exit 0
     fi

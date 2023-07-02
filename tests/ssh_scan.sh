@@ -18,6 +18,7 @@ echo "Launching SSH scans on ${host}:${port}"
 nc -vn "${host}" "${port}" > "${dest_dir}/banner_p${port}" 
 nmap -Pn -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
 # retrieve weak keys
+nmap -Pn --script ssh2-enum-algos -p${port} $host -oA "${dest_dir}/weak_kex_algos_p${port}" &
 nmap -Pn -p${port} $host --script ssh-hostkey --script-args ssh_hostkey=full -oA "${dest_dir}/weak_keys_p${port}" &
 # check auth methods
 nmap -Pn -p${port} $host --script ssh-auth-methods --script-args="ssh.user=root" -oA "${dest_dir}/auth_methods_p${port}" &

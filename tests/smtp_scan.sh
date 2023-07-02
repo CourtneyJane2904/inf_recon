@@ -19,7 +19,7 @@ nmap -Pn -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
 nmap -Pn -p${port} --script smtp-commands "${host}" -oA "${dest_dir}/commands_p${port}" &
 nmap -Pn -p${port} --script smtp-open-relay "${host}" -v -oA "${dest_dir}/open_relay_p${port}" &
 nmap -Pn -p${port} --script smtp-ntlm-info "${host}" -v -oA "${dest_dir}/ntlm_p${port}" &
-nmap -Pn --script=smtp-vuln-cve2010-4344,smtp-vuln-cve2011-1720,smtp-vuln-cve2011-1764 -p ${port} ${host} -oA "${dest_dir}/cves_p${port}" &
+nmap -Pn --script=smtp-vuln* -p ${port} ${host} -oA "${dest_dir}/cves_p${port}" &
 nmap -Pn --script=smtp-enum-users -p ${port} ${host} -oA "${dest_dir}/user_enum_p${port}" &
 
 echo "SMTP scans on ${host}:${port} launched."
