@@ -13,7 +13,7 @@ fi
 
 echo "Launching Oracle scans on ${host}:${port}"
 # must download
-nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p "${port}" "${host}" -oA "${dest_dir}/general_p${port}" &
+nmap -Pn --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p "${port}" "${host}" -oA "${dest_dir}/general_p${port}" &
 #nmap -p "${port}" --script ms-sql-brute -oA "${dest_dir}/nmap_brute_p${port}" "${host}" &
 hydra -C "${mssql_creds}" "${host}" mssql -s "${port}" -o "${dest_dir}/hydra_brute_p${port}" &
 echo "Oracle scans on ${host}:${port} launched."
