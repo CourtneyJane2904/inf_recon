@@ -15,7 +15,7 @@ echo "Launching RDP scans on ${host}:${port}"
 # enumeration with nmap
 # run default nmap scripts for ftp and retrieve version
 nmap -Pn -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
-nmap -Pn --script "rdp-vuln-ms12-020" -p ${port} -T4 ${host} -oA "${dest_dir}/vuln_p${port}" &
+nmap -Pn --script "rdp-vuln*" -p ${port} -T4 ${host} -oA "${dest_dir}/vulns_p${port}" &
 nmap -Pn --script "rdp-ntlm-info" -p ${port} -T4 ${host} -oA "${dest_dir}/ntlm_p${port}" &
 nmap -Pn --script "rdp-enum-encryption" -p ${port} -T4 ${host} -oA "${dest_dir}/encryption_p${port}" &
 
