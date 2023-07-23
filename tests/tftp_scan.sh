@@ -13,6 +13,6 @@ fi
 echo "Launching TFTP scans on ${host}:${port}"
 
 nmap -Pn -sU -p"${port}" -sV --script tftp-enum "${host}" -oA "${dest_dir}/tftp_enum_p${port}" &
-`msfconsole -q -x "spool ${dest_dir}/tftp_brute_msf_p${port};use auxiliary/scanner/tftp/tftpbrute;set RHOSTS ${host};exploit;exit"
+msfconsole -q -x "spool ${dest_dir}/tftp_brute_msf_p${port};use auxiliary/scanner/tftp/tftpbrute;set RHOSTS ${host};exploit;exit"
 echo "TFTP scans on ${host}:${port} launched."
 exit 0
