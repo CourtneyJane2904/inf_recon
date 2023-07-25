@@ -1,6 +1,11 @@
 root:calvin
 root:root
 root:toor
+ubuntu:root
+ubuntu:ubuntu
+ubuntu:password
+ubuntu:toor
+ubuntu:admin
 administrator:administator
 administrator:password
 NetLinx:password
