@@ -16,6 +16,7 @@ echo "Launching Oracle scans on ${host}:${port}"
 nmap -Pn --script "oracle-tns-version" -p ${port} -T4 -sV ${host} -oA "${dest_dir}/general_p${port}" &
 nmap -Pn --script +oracle-sid-brute -p ${port} ${host} -oA "${dest_dir}/sid_brute_p${port}" &
 oscanner -s "${host}" -P ${port} > "${dest_dir}/oscanner_p${port}" &
+hydra -L /usr/share/oscanner/lib/services.txt -s ${port} ${host} -o "${dest_dir}/hydra_sid_brute_p${port}" &
 echo "Oracle scans on ${host}:${port} launched."
 exit 0
 
