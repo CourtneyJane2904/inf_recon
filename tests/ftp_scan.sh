@@ -17,6 +17,7 @@ echo "Launching FTP scans on ${host}:${port}"
 # run default nmap scripts for ftp and retrieve version
 nc -vn "${host}" "${port}" > "${dest_dir}/banner_p${port}" 
 nmap -Pn -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
+hydra -t 1 -C ${ftp_creds} -vV $ip ftp -o "${dest_dir}/brute_p${port}" &
 
 echo "FTP scans on ${host}:${port} launched."
 exit 0
