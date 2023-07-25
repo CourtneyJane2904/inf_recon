@@ -1,6 +1,7 @@
 root:calvin
 root:root
 root:toor
+administrator:administator
 administrator:password
 NetLinx:password
 administrator:Amx1234!
