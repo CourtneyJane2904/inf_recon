@@ -12,7 +12,7 @@ fi
 
 echo "Launching POP scans on ${host}:${port}"
 
-nc -nv "${host}" "${port}" > "${dest_dir}/banner_p${port}"
+timeout 5 nc -nv "${host}" "${port}" > "${dest_dir}/banner_p${port}"
 nmap -Pn -sCV -p ${port} ${host} -oA "${dest_dir}/general_p${port}" &
 echo "POP scans on ${host}:${port} launched."
 exit 0
