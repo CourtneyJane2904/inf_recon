@@ -12,6 +12,6 @@ fi
 
 echo "Launching IDENT scans on ${host}:${port}"
 # must download
-ident-user-enum ${host} 22 {port} 139 445 > "${dest_dir}/user_enum"
+ident-user-enum ${host} 22 {port} 139 445 > "${dest_dir}/user_enum" &
 echo "IDENT scans on ${host}:${port} launched."
 exit 0
