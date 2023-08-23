@@ -14,7 +14,7 @@ fi
 echo "Launching HTTPS scans on ${host}:${port}"
 
 # enumeration with nmap
-openssl s_client -connect ${host}:${port} -crlf -quiet > "${dest_dir}/${host}/banner_p${port}"
+openssl s_client -connect ${host}:${port} -crlf -quiet > "${dest_dir}/${host}/banner_p${port}" &
 # run default nmap scripts for ftp and retrieve version
 nmap -Pn -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
 "${testssl}" "https://${host}:${port}" > "${dest_dir}/ssl_issues_p${port}" &
