@@ -12,7 +12,7 @@ fi
 
 echo "Launching IMAP scans on ${host}:${port}"
 # must download
-nc -nv "${host}" "${port}" > "${dest_dir}/banner_p${port}"
+timeout 5 nc -nv "${host}" "${port}" > "${dest_dir}/banner_p${port}" &
 nmap -Pn -sV --script "imap-ntlm-info" -p ${port} ${host} -oA "${dest_dir}/ntlm_info_p${port}" &
 echo "IMAP scans on ${host}:${port} launched."
 exit 0
