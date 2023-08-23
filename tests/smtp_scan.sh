@@ -14,7 +14,7 @@ echo "Launching SMTP scans on ${host}:${port}"
 
 # enumeration with nmap
 # run default nmap scripts for ftp and retrieve version
-nc -vn "${host}" "${port}" > "${dest_dir}/banner_p${port}" 
+timeout 5 nc -vn "${host}" "${port}" > "${dest_dir}/banner_p${port}" 
 nmap -Pn -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
 nmap -Pn -p${port} --script smtp-commands "${host}" -oA "${dest_dir}/commands_p${port}" &
 nmap -Pn -p${port} --script smtp-open-relay "${host}" -v -oA "${dest_dir}/open_relay_p${port}" &
