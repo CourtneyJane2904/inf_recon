@@ -15,7 +15,7 @@ echo "Launching SSH scans on ${host}:${port}"
 
 # enumeration with nmap
 # run default nmap -Pn scripts for SSH and retrieve version
-nc -vn "${host}" "${port}" > "${dest_dir}/banner_p${port}" 
+timeout 5 nc -vn "${host}" "${port}" > "${dest_dir}/banner_p${port}" 
 nmap -Pn -p${port} $host -sCV -oA "${dest_dir}/general_p${port}" &
 # retrieve weak keys
 nmap -Pn --script ssh2-enum-algos -p${port} $host -oA "${dest_dir}/weak_kex_algos_p${port}" &
