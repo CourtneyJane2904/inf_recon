@@ -6,6 +6,9 @@ if [[ "$(whoami)" != "root" ]]; then
 	stty echo
 	exit 1
 fi
+
+./cleanup.sh
+
 filename="$1"
 list_or_subnet="$2"
 hosts="${3}"
