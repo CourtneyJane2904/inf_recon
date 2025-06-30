@@ -14,7 +14,7 @@ echo "Launching globalcatLDAP scans on ${host}:${port}"
 
 # enumeration with nmap
 # run default nmap scripts for ftp and retrieve version
-nmap -Pn -sV --script "ldap* and not brute" "{$host}" -p "${port}" -oN "${dest_dir}/enum_p${port}" &
+nmap -Pn -sV --script "ldap* and not brute" "${host}" -p "${port}" -oN "${dest_dir}/enum_p${port}" &
 
 echo "FTP scans on ${host}:${port} launched."
 exit 0
