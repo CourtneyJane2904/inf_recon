@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # if user is not root, don't run
-if [[ "$(whoami)" -ne "root" ]]; then
+if [[ "$(whoami)" != "root" ]]; then
 	echo "Must be root to run this script."
 	stty echo
 	exit 1
